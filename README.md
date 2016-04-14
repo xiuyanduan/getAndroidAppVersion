@@ -8,11 +8,12 @@
 
 ### 已包含应用商店
 * [小米](http://app.mi.com/)
-*  [华为](http://appstore.huawei.com/)
-*  [豌豆荚](http://www.wandoujia.com/apps)
-*  [搜狗手机助手](http://zhushou.sogou.com/apps/)
-*  [应用汇](http://www.appchina.com/)
-*  [n多网](http://www.nduoa.com/)
-*  [安卓市场](http://apk.hiapk.com/)
+* [华为](http://appstore.huawei.com/)
+* [豌豆荚](http://www.wandoujia.com/apps)
+* [搜狗手机助手](http://zhushou.sogou.com/apps/)
+* [应用汇](http://www.appchina.com/)
+* [n多网](http://www.nduoa.com/)
+* [安卓市场](http://apk.hiapk.com/)
 * [安智市场](http://www.anzhi.com/)
-
+* [木蚂蚁](http://www.mumayi.com/)
+* [360手机助手](http://zhushou.360.cn/)

@@ -6,13 +6,18 @@ from bs4 import BeautifulSoup
 reload(sys)
 sys.setdefaultencoding( "utf-8" )
 
+# appName="记健康"
+# versionREsting='\d{1,2}\.\d{1,2}\.\d{1,2}'
+
 # 应用名字，此处以微信举例
 appName="微信"
-# 应用版本号（6.3.15.49_r8aff805）的正则表达式
-versionREsting='\d{1,2}\.\d{1,2}\.\d{1,2}.\d{1,10}\_.+\d'
+# 应用版本号（6.3.15.49）的正则表达式
+versionREsting='\d{1,2}\.\d{1,2}\.\d{1,2}.\d{1,2}'
 
 def getUrlContent(appSearchUrl):
-    htmlContent=requests.get(appSearchUrl).text
+    user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
+    headers = { 'User-Agent' : user_agent }
+    htmlContent=requests.get(appSearchUrl,headers=headers).text
     return htmlContent
 
 def huawei(appName):
@@ -116,6 +121,35 @@ def sougou(appName):
     exactVersion= re.search(versionREsting,versionString).group()
     return exactVersion
 
+def mumayi(appName):
+    appSearchUrl="http://s.mumayi.com/index.php?q="+appName
+    searchHtmlContent=getUrlContent(appSearchUrl)
+    htmlBeautifulSoup=BeautifulSoup(searchHtmlContent,'html.parser')
+    appExactUrl=htmlBeautifulSoup.select('.applist')[0].a['href']
+    appHtmlContent=getUrlContent(appExactUrl)
+    appExactUrl_bs=BeautifulSoup(appHtmlContent,'html.parser')
+    versionString=appExactUrl_bs.select('.iappname')[0].text
+    exactVersion= re.search(versionREsting,versionString).group()
+    return exactVersion
+
+def market360(appName):
+    appSearchUrl="http://zhushou.360.cn/search/index/?kw="+appName
+    searchHtmlContent=getUrlContent(appSearchUrl)
+    htmlBeautifulSoup=BeautifulSoup(searchHtmlContent,'html.parser')
+    appExactUrl=htmlBeautifulSoup.select('.title')[0].next_sibling.next_sibling.next_sibling.next_sibling.li.dl.dt.a['href']
+    appExactUrl=r"http://zhushou.360.cn/"+appExactUrl
+    appHtmlContent=getUrlContent(appExactUrl)
+    appExactUrl_bs=BeautifulSoup(appHtmlContent,'html.parser')
+    versionString=appExactUrl_bs.select('.base-info')[0].tr.next_sibling.next_sibling.td.text
+    exactVersion= re.search(versionREsting,versionString).group()
+    return exactVersion
+
+def meizu(appName):
+    pass
+
+def zhushou91(appName):
+    pass
+
 def tencent(appName):
     pass
 
@@ -124,13 +158,4 @@ def youyiMarket(appName):
 
 def baidu(appName):
     # 搜索结果有广告嫌疑
-    pass
-
-def market360(appName):
-    pass
-
-def meizu(appName):
-    pass
-
-def zhushou91(appName):
     pass
